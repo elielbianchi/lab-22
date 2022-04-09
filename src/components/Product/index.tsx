@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -8,21 +9,34 @@ export type ProductProps = {
   picture: string;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => (
-  <Wrapper>
-    <img src={picture} alt={`Imagem de referência ${name}`} />
+const Product = ({ id, name, price, picture }: ProductProps) => {
+  const [quantity, setQuantity] = useState(0);
 
-    <Info>
-      <Column>
-        <Text>{name}</Text>
-        <Text>{price}</Text>
-      </Column>
+  function handleChange(action: string) {
+    if (action === "subs" && quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+    if (action === "plus") {
+      setQuantity(quantity + 1);
+    }
+  }
 
-      <WrapperIncrementor>
-        <Incrementor id={id} quantity={1} />
-      </WrapperIncrementor>
-    </Info>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <img src={picture} alt={`Imagem de referência ${name}`} />
+
+      <Info>
+        <Column>
+          <Text>{name}</Text>
+          <Text>{price}</Text>
+        </Column>
+
+        <WrapperIncrementor>
+          <Incrementor id={id} quantity={quantity} updater={handleChange}/>
+        </WrapperIncrementor>
+      </Info>
+    </Wrapper>
+  );
+};
 
 export default Product;

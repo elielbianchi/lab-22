@@ -6,18 +6,19 @@ import { Wrapper, IconWrapper, Quantity } from "./styles";
 type IncrementorProps = {
   id: number;
   quantity: number;
+  updater: (action: string) => void;
 };
 
-const Incrementor = ({ id, quantity }: IncrementorProps) => (
+const Incrementor = ({ id, quantity, updater }: IncrementorProps) => (
   <Wrapper>
     <IconWrapper>
-      <SubtractIcon aria-label="Subtract item" />
+      <SubtractIcon aria-label="Subtract item" onClick={ () => updater("subs") } />
     </IconWrapper>
 
     <Quantity>{quantity}</Quantity>
 
     <IconWrapper>
-      <PlusIcon aria-label="Add item" />
+      <PlusIcon aria-label="Add item" onClick={ () => updater("plus") } />
     </IconWrapper>
   </Wrapper>
 );
