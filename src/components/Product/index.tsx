@@ -11,8 +11,12 @@ export type ProductProps = {
 
 const Product = ({ id, name, price, picture }: ProductProps) => {
   const [quantity, setQuantity] = useState(0);
+  // const { cart, setCart } = useCart();
 
-  const priceView = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+  const priceView = price.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
 
   function handleChange(action: string) {
     if (action === "subs" && quantity > 0) {
@@ -22,6 +26,16 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
       setQuantity(quantity + 1);
     }
   }
+
+  // const handleIncrement = (amount: number) => {
+  //   amount += 1;
+  //   setCart(id, name, price, picture, amount)
+  // }
+
+  // const handleDecrement = (amount: number) => {
+  //   amount -= 1;
+  //   setCart(id, name, price, picture, amount)
+  // }
 
   return (
     <Wrapper>
@@ -34,7 +48,13 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
         </Column>
 
         <WrapperIncrementor>
-          <Incrementor id={id} quantity={quantity} updater={handleChange}/>
+          <Incrementor
+            id={id}
+            quantity={0}
+            updater={handleChange}
+            // handleIncrement={handleIncrement}
+            // handleDecrement={handleDecrement}
+          />
         </WrapperIncrementor>
       </Info>
     </Wrapper>
