@@ -3,28 +3,30 @@ import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product, { ProductProps } from "../components/Product";
-import axios from "axios";
+import { useProduct } from "../context/global.context";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [productData, setProductData] = useState([]);
-
-  async function dataSearch() {
-    const database = "http://localhost:3001/products";
-    const response = await axios.get(database);
-    setProductData(response.data);
-  }
+  const { products, setProducts } = useProduct();
 
   useEffect(() => {
-    dataSearch();
+    setProducts();
   }, []);
 
   return (
     <>
       <Header setIsOpen={setIsOpen} />
       <Container>
-        {productData.map((product: ProductProps) => {
-          return <Product {...product} />;
+        {products.map((product: ProductProps) => {
+          return (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              picture={product.picture}
+            />
+          );
         })}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
