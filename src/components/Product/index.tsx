@@ -12,6 +12,8 @@ export type ProductProps = {
 const Product = ({ id, name, price, picture }: ProductProps) => {
   const [quantity, setQuantity] = useState(0);
 
+  const priceView = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
   function handleChange(action: string) {
     if (action === "subs" && quantity > 0) {
       setQuantity(quantity - 1);
@@ -28,7 +30,7 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
       <Info>
         <Column>
           <Text>{name}</Text>
-          <Text>{price}</Text>
+          <Text>{priceView}</Text>
         </Column>
 
         <WrapperIncrementor>
