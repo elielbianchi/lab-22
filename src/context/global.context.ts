@@ -4,14 +4,13 @@ import { ProductProps } from "../components/Product";
 
 type Product = {
   products: ProductProps[];
-  setDatabase: () => void;
+  setProducts: () => void;
 };
 
 export const useProduct = create<Product>((set) => ({
   products: [],
-  setDatabase: async () => {
+  setProducts: async () => {
     const response = await axios.get("http://localhost:3001/products");
-    console.log(response.data);
     set(() => ({ products: response.data }));
   },
 }));
