@@ -2,18 +2,34 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
+      "name": "Apple iPhone 12",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
-      "price": 299.50
+      "price": 3299.50
     },
 
     {
       "id": 2,
-      "name": "Product 2",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Samsung Galaxy S21+",
+      "picture": "https://images.samsung.com/africa_pt/smartphones/galaxy-s21/buy/galaxy-s21plus-phantom-violet.png",
       "quantity": 4,
-      "price": 399.50
+      "price": 3599.10
+    },
+
+    {
+      "id": 3,
+      "name": "Motorola Edge Plus",
+      "picture": "https://a-static.mlcdn.com.br/618x463/smartphone-motorola-edge-256gb-thunder-grey-5g-12gb-ram-tela-67-cam-quadrupla-selfie-25mp/magazineluiza/155586500/e2417d69db9fb8346566cf70bd568abd.jpg",
+      "quantity": 3,
+      "price": 2899.80
+    },
+
+    {
+      "id": 4,
+      "name": "Xiaomi Mi 11 Lite",
+      "picture": "https://m.media-amazon.com/images/I/51RtOgO8N0L._AC_SL1121_.jpg",
+      "quantity": 5,
+      "price": 2499.84
     }
   ]
 }
