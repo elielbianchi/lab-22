@@ -9,19 +9,25 @@ type IncrementorProps = {
   handleDecrement: () => void;
 };
 
-const Incrementor = ({ amount, handleIncrement, handleDecrement }: IncrementorProps) => (
+const Incrementor = ({
+  amount,
+  handleIncrement,
+  handleDecrement,
+}: IncrementorProps) => (
   <Wrapper>
     <IconWrapper>
-      <SubtractIcon aria-label="Subtract item" onClick={ () => handleDecrement() } />
+      <SubtractIcon
+        aria-label="Subtract item"
+        onClick={() => handleDecrement()}
+      />
     </IconWrapper>
 
     <Quantity>{amount}</Quantity>
 
     <IconWrapper>
-      <PlusIcon aria-label="Add item" onClick={ () => handleIncrement() } />
+      <PlusIcon aria-label="Add item" onClick={() => handleIncrement()} />
     </IconWrapper>
   </Wrapper>
 );
 
 export default Incrementor;
-
