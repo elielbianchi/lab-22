@@ -37,6 +37,8 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
               name={product.name}
               price={product.price}
               picture={product.picture}
+              amount={product.amount}
+              quantity={product.quantity}
             />
           );
         })}
