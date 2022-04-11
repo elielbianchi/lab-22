@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useProducts } from "../../context/global.context";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -7,37 +7,33 @@ export type ProductProps = {
   name: string;
   price: number;
   picture: string;
-  quantity?: number;
-  amount?: number;
+  amount: number;
+  quantity: number;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => {
-  const [quantity, setQuantity] = useState(0);
-  // const { cart, setCart } = useCart();
+const Product = ({ id, name, price, picture, amount }: ProductProps) => {
+  const { products, setNewAmount } = useProducts();
 
-  const priceView = price.toLocaleString("pt-br", {
+  const handleIncrement = () => {
+    let product = products.find((product) => product.id === id);
+    if (product!.amount <= product!.quantity) {
+      product!.amount += 1;
+      setNewAmount(products);
+    }
+  };
+
+  const handleDecrement = () => {
+    let product = products.find((product) => product.id === id);
+    if (product!.amount > 0) {
+      product!.amount -= 1;
+      setNewAmount(products);
+    }
+  };
+
+  const formattedPrice = price.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
-
-  function handleChange(action: string) {
-    if (action === "subs" && quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-    if (action === "plus") {
-      setQuantity(quantity + 1);
-    }
-  }
-
-  // const handleIncrement = (amount: number) => {
-  //   amount += 1;
-  //   setCart(id, name, price, picture, amount)
-  // }
-
-  // const handleDecrement = (amount: number) => {
-  //   amount -= 1;
-  //   setCart(id, name, price, picture, amount)
-  // }
 
   return (
     <Wrapper>
@@ -46,16 +42,14 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
       <Info>
         <Column>
           <Text>{name}</Text>
-          <Text>{priceView}</Text>
+          <Text>{formattedPrice}</Text>
         </Column>
 
         <WrapperIncrementor>
           <Incrementor
-            id={id}
-            quantity={0}
-            updater={handleChange}
-            // handleIncrement={handleIncrement}
-            // handleDecrement={handleDecrement}
+            amount={amount}
+            handleIncrement={handleIncrement}
+            handleDecrement={handleDecrement}
           />
         </WrapperIncrementor>
       </Info>
