@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { CloseOutline } from "@styled-icons/evaicons-outline";
 
 import Button from "../Button";
@@ -14,11 +14,21 @@ export type MenuPaymentProps = {
 };
 
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
-  const { products, setProducts } = useProducts();
+  const { products } = useProducts();
 
-  useEffect(() => {
-    setProducts();
-  }, []);
+  const totalPrice = () => {
+    let total: number = 0;
+
+    products.forEach((product) => {
+      if (product.amount! > 0) {
+        total += product.amount! * product.price;
+      }
+    });
+    return total.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
 
   return (
     <Wrapper isOpen={isOpen}>
@@ -28,26 +38,15 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         </Typography>
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
-      <Typography>
-        {products.map((product) => {
-          return (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              picture={product.picture}
-              amount={product.amount}
-              quantity={product.quantity}
-            />
-          );
-        })}
-      </Typography>
+      {products.map(
+        (product) =>
+          product.amount! > 0 && <Product key={product.id} {...product} />
+      )}
       <Subtotal>
         <Typography level={5} size="large" fontWeight={600}>
           Total
         </Typography>
-        <Typography>1,600.50</Typography>
+        <Typography>{totalPrice()}</Typography>
       </Subtotal>
 
       <Button fullWidth>Finalizar compra</Button>
