@@ -5,7 +5,7 @@ import Button from "../Button";
 import Typography from "../Typography";
 
 import { Wrapper, Subtotal, Header } from "./styles";
-import { useProduct } from "../../context/global.context";
+import { useProducts } from "../../context/global.context";
 import Product from "../Product";
 
 export type MenuPaymentProps = {
@@ -14,7 +14,7 @@ export type MenuPaymentProps = {
 };
 
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
-  const { products, setProducts } = useProduct();
+  const { products, setProducts } = useProducts();
 
   useEffect(() => {
     setProducts();
