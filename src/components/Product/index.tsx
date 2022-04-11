@@ -16,7 +16,7 @@ const Product = ({ id, name, price, picture, amount }: ProductProps) => {
 
   const handleIncrement = () => {
     let product = products.find((product) => product.id === id);
-    if (product!.amount <= product!.quantity) {
+    if (product!.amount < product!.quantity) {
       product!.amount += 1;
       setNewAmount(products);
     }
