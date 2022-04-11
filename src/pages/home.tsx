@@ -3,11 +3,11 @@ import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product, { ProductProps } from "../components/Product";
-import { useProduct } from "../context/global.context";
+import { useProducts } from "../context/global.context";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { products, setProducts } = useProduct();
+  const { products, setProducts } = useProducts();
 
   useEffect(() => {
     setProducts();

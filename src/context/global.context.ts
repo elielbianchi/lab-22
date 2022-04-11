@@ -5,34 +5,15 @@ import { ProductProps } from "../components/Product";
 type Product = {
   products: ProductProps[];
   setProducts: () => void;
+  setNewAmount: (productsList: ProductProps[]) => void;
 };
 
-export const useProduct = create<Product>((set) => ({
+export const useProducts = create<Product>((set) => ({
   products: [],
   setProducts: async () => {
     const response = await axios.get("http://localhost:3001/products");
+    response.data.map((product: ProductProps) => (product.amount = 0));
     set(() => ({ products: response.data }));
   },
-}));
-
-type CartProps = ProductProps & { amount: number };
-
-type Cart = {
-  cart: CartProps[];
-  setCart: (
-    id: number,
-    name: string,
-    price: number,
-    picture: string,
-    amount: number
-  ) => void;
-};
-
-export const useCart = create<Cart>((set) => ({
-  cart: [],
-  setCart: (id, name, price, picture, amount) => {
-    set(({ cart }) => ({
-      cart: [...cart, { id, name, price, picture, amount }],
-    }));
-  },
+  setNewAmount: (productsList) => set({ products: productsList }),
 }));

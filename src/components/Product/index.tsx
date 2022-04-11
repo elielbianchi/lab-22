@@ -7,6 +7,8 @@ export type ProductProps = {
   name: string;
   price: number;
   picture: string;
+  quantity?: number;
+  amount?: number;
 };
 
 const Product = ({ id, name, price, picture }: ProductProps) => {
