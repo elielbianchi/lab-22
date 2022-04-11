@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
-import Product, { ProductProps } from "../components/Product";
+import Product from "../components/Product";
 import { useProducts } from "../context/global.context";
 
 const Home = () => {
@@ -17,16 +17,8 @@ const Home = () => {
     <>
       <Header setIsOpen={setIsOpen} />
       <Container>
-        {products.map((product: ProductProps) => {
-          return (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              picture={product.picture}
-            />
-          );
+        {products.map((product) => {
+          return <Product key={product.id} {...product} />;
         })}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
